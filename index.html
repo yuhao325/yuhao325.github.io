@@ -1,34 +1,126 @@
-﻿<!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-    <meta charset="utf-8" />
-    <title>原神抽卡分析</title>
-    <script src="./analysis.js"></script>
-</head>
-<body>
-    <video id="bg" loop="loop" autoplay="autoplay" muted="muted" style="opacity: 1; width: 100%; height: 100%; object-fit: fill; ">
-        <source src=".\bg.mp4" type="audio/mp4" />
-    </video>
-    <div id="link">
-        <!--<iframe id="user" src="https://user.miyoushe.com/" style="margin: auto; width: 42%; height: 90%; position: absolute; top: 50%; margin-top: -18%; left: 50%; margin-left: -19%; "></iframe>-->
-        <iframe id="user" frameborder="0" scrolling="no" allowtransparency="true" src="https://user.miyoushe.com/login-platform/index.html?iframe_level=2#/login/captcha" style="margin: auto; width: 42%; height: 90%; position: absolute; top: 50%; margin-top: -18%; left: 50%; margin-left: -19%; "></iframe>
-        <!-- var el = document.createElement("iframe");
-    el.setAttribute('id', 'ifrm');
-    document.body.appendChild(el);
-    el.setAttribute('src', 'http://AWEBSITE.com/');
-    alert(document.getElement("iframe").cookie); -->
-    </div>
-    <div id="analysis">
-        再次访问
-    </div>
-    <script>
-        path = getQueryString();
-        if (path == null) {
-            document.body.removeChild(document.getElementById("analysis"))
-        } else {
-            document.body.removeChild(document.getElementById("link"))
-        }
-        alert(document.getElementById("link").cookie);
-    </script>
-</body>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>生日快乐</title>
+		<script type="text/javascript">
+			
+			var url = window.location.href;
+			var obj = {};
+			if (url.split("?").length == 1) {
+				window.close();
+			} else {
+				var str = url.split("?")[1].split("&");
+				for (var i = 0; i < str.length; i++) {
+					var a = str[i].split('=')
+					obj[decodeURI(a[0])] = decodeURI(a[1])
+				}
+			}
+			
+			window.onload = function() {
+				document.getElementById("root").style.visibility = "hidden"
+				var w = window.innerWidth;
+				var h = window.innerHeight;
+				
+				var width = w * 3 / 4;
+				var height = h * 2 / 5;
+				if (height * 5 / 3 < width) {
+					width = height * 5 / 3;
+				} else {
+					height = width * 3 / 5;
+				}
+				
+				var envelope = document.getElementById("start_button");
+				envelope.style.height = height + "px";
+				envelope.style.width = width + "px";
+				envelope.style.top = (h - height) / 2 + "px";
+				envelope.style.left = (w - width) / 2 + "px";
+				
+				var envelope = document.getElementById("envelope");
+				envelope.style.height = height + "px";
+				envelope.style.width = width + "px";
+				if (envelope.getContext) {
+				    var context = envelope.getContext("2d");
+					width = envelope.width;
+					height = envelope.height;
+				    context.fillStyle = "#dddddd";
+				    context.fillRect(0, 0, width, height);
+					
+				    context.fillStyle = "#ffffff";
+					context.lineWidth = 2;
+					context.shadowColor = '#000000';
+					context.shadowBlur = 4;
+				    context.fillRect(width / 200, -height * 3 / 5, width * 99 / 100, height);
+					
+				    context.strokeStyle = "#ff0000";
+					context.shadowColor = '#000000';
+					context.lineWidth = 1;
+					context.shadowColor = '#000000';
+					context.shadowBlur = 1;
+					for (var i = 0;i < 6;i++)
+					{ 
+						context.strokeRect((i + 1) * width / 13, height / 30, width / 16, height / 10);
+					}
+				}
+				
+				width = w * 3 / 4;
+				height = h * 2 / 5;
+				if (height * 5 / 3 < width) {
+					width = height * 5 / 3;
+				} else {
+					height = width * 3 / 5;
+				}
+				
+				var text = document.getElementById("text1");
+				text.style.fontSize = width / 14 + "px";
+				text = document.getElementById("text2");
+				text.style.fontSize = width / 20 + "px";
+				text.innerText = obj["modification"] + "的你:";
+				text = document.getElementById("name");
+				text.style.fontSize = width / 23 + "px";
+				text.innerText = obj["name"] + "  亲启";
+				
+			}
+			
+			async function hello() {
+			    document.getElementById("start_button").style.visibility = "hidden";
+				await document.body.requestFullscreen();
+				setTimeout(function() {
+					document.getElementById("root").style.visibility = "visible"
+					var w = window.innerWidth;
+					var h = window.innerHeight;
+					var width = w;
+					var height = h;
+					if (w * 1024 / 1920 < h) {
+						height = w * 1024 / 1920;
+					} else {
+						width = h * 1920 / 1024;
+					}
+					var container = document.getElementById("root");
+					console.log(height);
+					console.log(width);
+					container.style.width = width + "px";
+					container.style.height = height + "px";
+					container.style.top = (h - height) / 2 + "px";
+					container.style.left = (w - width) / 2 + "px";
+				}, 1500);
+			}
+		</script>
+		<style>
+			:root {
+			    color-scheme: only light;
+			}
+		</style>
+	</head>
+	<body style="background-color: #2e317c;"><div style="background-color: #2e317c;width: 100%;height: 100%;left: 0px;top: 0px;position: absolute;">
+		<div style="position: absolute;background-color: #2e317c;border-radius: 5px;" id="start_button" onclick="hello()">
+			<canvas id="envelope" style="position: absolute;border-radius: 5px;"></canvas>
+			<img src="stamp.jpg" style="position: absolute;width: 17%;top: 3%;left: 80%;"/>
+			<img src="stitch.png" style="position: absolute;width: 16%;top: 27%;left: 42%;"/>
+			<div id="text1" style="position: absolute;font-family: 华文行楷;top: 20%;left: 5%;color: #898989;">致</div>
+			<div id="text2" style="position: absolute;font-family: 华文行楷;top: 24%;left: 13%;color: #898989;">素未谋面的你:</div>
+			<div id="name" style="position: absolute;font-family: 楷体;top: 60%;width: 100%;color: #000000;text-align: center;"></div>
+		</div>
+		<div style="background-color: #2e317c;position: absolute;" id="root">你好</div>
+	</div></body>
 </html>
