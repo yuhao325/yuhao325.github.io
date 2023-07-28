@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>生日快乐</title>
+		<meta name="theme-color" content="#2e317c">
+		<script type="text/javascript">
+			
+			var url = window.location.href;
+			var obj = {};
+			if (url.split("?").length == 1) {
+				window.close();
+			} else {
+				var str = url.split("?")[1].split("&");
+				for (var i = 0; i < str.length; i++) {
+					var a = str[i].split('=')
+					obj[decodeURI(a[0])] = decodeURI(a[1])
+				}
+			}
+			
+			var can = false;
+			
+			window.onload = async function() {
+				document.getElementById("root").style.visibility = "hidden"
+				var w = window.innerWidth;
+				var h = window.innerHeight;
+				
+				var width = w * 3 / 4;
+				var height = h * 2 / 5;
+				if (height * 5 / 3 < width) {
+					width = height * 5 / 3;
+				} else {
+					height = width * 3 / 5;
+				}
+				
+				var envelope = document.getElementById("start_button");
+				envelope.style.height = height + "px";
+				envelope.style.width = width + "px";
+				envelope.style.top = (h - height) / 2 + "px";
+				envelope.style.left = (w - width) / 2 + "px";
+				
+				var envelope = document.getElementById("envelope");
+				envelope.style.height = height + "px";
+				envelope.style.width = width + "px";
+				if (envelope.getContext) {
+				    var context = envelope.getContext("2d");
+					width = envelope.width;
+					height = envelope.height;
+				    context.fillStyle = "#dddddd";
+				    context.fillRect(0, 0, width, height);
+					
+				    context.fillStyle = "#ffffff";
+					context.lineWidth = 2;
+					context.shadowColor = '#000000';
+					context.shadowBlur = 4;
+				    context.fillRect(width / 200, -height * 3 / 5, width * 99 / 100, height);
+					
+				    context.strokeStyle = "#ff0000";
+					context.shadowColor = '#000000';
+					context.lineWidth = 1;
+					context.shadowColor = '#000000';
+					context.shadowBlur = 1;
+					for (var i = 0;i < 6;i++)
+					{ 
+						context.strokeRect((i + 1) * width / 13, height / 30, width / 16, height / 10);
+					}
+				}
+				
+				width = w * 3 / 4;
+				height = h * 2 / 5;
+				if (height * 5 / 3 < width) {
+					width = height * 5 / 3;
+				} else {
+					height = width * 3 / 5;
+				}
+				
+				var font = new FontFace('华文行楷', 'url(./xk.ttf)');
+				await font.load();
+				document.fonts.add(font);
+				var font = new FontFace('楷体', 'url(./kt.ttf)');
+				await font.load();
+				document.fonts.add(font);
+				var text = document.getElementById("text1");
+				text.style.fontSize = width / 14 + "px";
+				text.innerText = "致";
+				text.style.fontFamily = "华文行楷";
+				text = document.getElementById("text2");
+				text.style.fontSize = width / 20 + "px";
+				text.innerText = obj["modification"] + "的你:";
+				text.style.fontFamily = "华文行楷";
+				text = document.getElementById("name");
+				text.style.fontSize = width / 23 + "px";
+				text.innerText = obj["name"] + "  亲启";
+				text.style.fontFamily = "楷体";
+				can = true;
+			}
+			
+			function sleep(time){
+			 return new Promise((resolve) => setTimeout(resolve, time));
+			}
+			
+			async function hello() {
+				
+				if (!can) {
+					return;
+				}
+				
+				const music = new Audio("bgm.m4a");
+				music.play();
+				music.loop =true;
+				
+				var container = document.getElementById("root");
+			    document.getElementById("start_button").style.visibility = "hidden";
+				await document.body.requestFullscreen();
+				await sleep(1500);
+				document.getElementById("root").style.visibility = "visible"
+				var w = window.innerWidth;
+				var h = window.innerHeight;
+				var width = w;
+				var height = h;
+				if (w * 1024 / 1920 < h) {
+					height = w * 1024 / 1920;
+				} else {
+					width = h * 1920 / 1024;
+				}
+				container.style.width = width + "px";
+				container.style.height = height + "px";
+				container.style.top = (h - height) / 2 + "px";
+				container.style.left = (w - width) / 2 + "px";
+				container = document.getElementById("draw");
+				container.style.width = width + "px";
+				container.style.height = height + "px";
+				context = container.getContext('2d');
+				
+				h = height;
+				w = width;
+				
+				var ratio = window.devicePixelRatio;
+				container.width = width * ratio;
+				container.height = height * ratio;
+				width = container.width;
+				height = container.height;
+				context.fillStyle = "#ffffff";
+				context.fillRect(0, 0, width, height);
+				
+				var s = [["在繁星闪烁的夜空下，",
+						"为你点燃一支心愿的烛光。",
+            			"它照亮了我对你无尽的幻想，",
+            			"也照亮了你特别的日子。"],
+            			["从我们初次谈话起，",
+            			"友谊的种子就在心头生根发芽。"],
+            			["你与我的一次次畅谈，",
+            			"陪伴我度过了无数美好时光。",
+            			"我愿与你一起追逐梦想，",
+            			"在彼此的青春里留下足迹。"],
+            			["此刻，我要对你说声：",
+            			"“祝你生日快乐，我的挚友！”",
+            			"愿你的未来充满无限喜悦，",
+            			"幸福与成功常伴左右。"],
+            			["愿你的生活如诗如画，",
+            			"每一刻都充满温馨与幸福。",
+            			"无论风雨如何变幻，",
+						"我们的友谊长存不变。"],
+            			["生日快乐，愿你心中充满阳光，",
+            			"勇敢追逐梦想，无畏无惧。",
+            			"愿美好永远伴随着你，",
+            			"愿你的人生如同璀璨的烟火，",
+            			"照亮黑夜，点亮未来。"],
+            			["愿你幸福、健康、快乐，",
+            			"永远被幸福和美好包围。",
+            			"愿你的生命中充满欢声笑语，",
+            			"每一天都洋溢着幸福的微笑，",
+            			"永远保持那颗善良纯真的心。"]];	
+				
+				
+				var font = new FontFace('font', 'url(./NZBZ.ttf)');
+				await font.load();
+				document.fonts.add(font);
+				context.font = width / 20 + "px font";
+				var gradient = context.createLinearGradient(0,0,width,0);
+				gradient.addColorStop("0","magenta");
+				gradient.addColorStop("0.5","blue");
+				gradient.addColorStop("1.0","red");
+				context.fillStyle = gradient;
+				context.textBaseline = "top";
+				context.textAlign = 'start';
+				
+				context.fillText("Dear " + obj["name"] + ":", width / 100, height / 100);
+				
+				await sleep(250);
+				context.textAlign = 'center';
+				context.font = width / 16 + "px font";
+				for (let m = 0; m < s.length; m ++) {
+					context.fillStyle = "#ffffff";
+					context.fillRect(0, height * 15 / 100, width, height * 85 / 100);
+					await sleep(750);
+					context.fillStyle = gradient;
+					let delta = height * 70 / 100 / s[m].length;
+					for (let i = 0; i < s[m].length; i ++) {
+						console.log(s[m][i]);
+						context.fillText(s[m][i], width / 2, height * 20 / 100 + delta * i);
+						await sleep(1500);
+					}
+					await sleep(750);
+				}
+				await sleep(1500);
+				container.style.visibility = "hidden";
+				await document.exitFullscreen();
+				await sleep(1500);
+				document.getElementById("end").style.visibility = "visible";
+				w = window.innerWidth;
+				h = window.innerHeight;
+				document.body.style.width = w;
+				document.body.style.height = h;
+				width = w;
+				height = h;
+				if (w < h) {
+					height = w;
+				} else {
+					width = h;
+				}
+				container = document.getElementById("birthday");
+				
+				container.style.width = width + "px";
+				container.style.height = height + "px";
+				container.style.top = (h - height) / 2 + "px";
+				container.style.left = (w - width) / 2 + "px";
+				
+				text = document.getElementById("sign");
+				text.style.top = h * 96 / 100 + "px";
+				text.style.fontSize = h * 3 / 100 + "px";
+				
+				document.body.style.backgroundColor = "#050A38";
+			}
+		</script>
+		<style>
+			:root {
+			    color-scheme: only light;
+			}
+		</style>
+	</head>
+	<body style="background-color: #2e317c;"><div style="background-color: #2e317c;width: 100%;height: 100%;left: 0px;top: 0px;position: absolute;">
+		<div style="position: absolute;background-color: #2e317c;border-radius: 5px;" id="start_button" onclick="hello()">
+			<canvas id="envelope" style="position: absolute;border-radius: 5px;"></canvas>
+			<img src="stamp.jpg" style="position: absolute;width: 17%;top: 3%;left: 80%;"/>
+			<img src="stitch.png" style="position: absolute;width: 16%;top: 27%;left: 42%;"/>
+			<div id="text1" style="position: absolute;top: 20%;left: 5%;color: #898989;"></div>
+			<div id="text2" style="position: absolute;top: 24%;left: 13%;color: #898989;"></div>
+			<div id="name" style="position: absolute;top: 60%;width: 100%;color: #000000;text-align: center;"></div>
+		</div>
+		<div style="background-color: #2e317c;position: absolute;" id="root">
+			<canvas id="draw" style="background-color: #ffffff;position: absolute;border-radius: 5px;"></canvas>
+		</div>
+		<div style="background-color: #050A38;position: absolute;visibility: hidden;width: 100%;height: 100%;left: 0px;top: 0px;" id="end">
+			<div id="birthday" style="position: absolute;background-color: #050A38;">
+				<img src="happy.gif" style="top: 14%;left: 0%;width: 100%;height: 70%;"/>
+			</div>
+			<div id="sign" style="position: absolute;width: 100%;left: 0%;text-align: center;color: #ffffff;">Made by Ye</div>
+		</div>
+	</div></body>
+</html>
